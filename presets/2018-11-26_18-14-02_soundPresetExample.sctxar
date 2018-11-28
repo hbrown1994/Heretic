@@ -1,0 +1,42 @@
+var o, p;
+o = [
+	Archive.prNew,  IdentityDictionary.prNew,  Array.prNew(32),  Event.prNew,  
+	Array.prNew(16),  Array.prNew(7),  Array.prNew(7),  Array.prNew(11)
+];
+p = [
+	// Archive
+	0, [ dictionary: o[1] ],  
+	// IdentityDictionary
+	1, [ array: o[2],  size: 1,  
+		proto: nil,  parent: nil,  
+		know: false ],  
+	// Array
+	2, [ 'presets',  o[3],  nil,  nil,  
+		nil,  nil,  nil,  nil,  
+		nil,  nil,  nil,  nil,  
+		nil,  nil,  nil,  nil,  
+		nil,  nil,  nil,  nil,  
+		nil,  nil,  nil,  nil,  
+		nil,  nil,  nil,  nil,  
+		nil,  nil,  nil,  nil ],  
+	// Event
+	3, [ array: o[4],  size: 3,  
+		proto: nil,  parent: nil,  
+		know: true ],  
+	// Array
+	4, [ '11-14-2018',  o[5],  '11-14-2018-2',  o[6],  
+		nil,  nil,  nil,  nil,  
+		nil,  nil,  '11-14-2018-1',  o[7],  
+		nil,  nil,  nil,  nil ],  
+	// Array
+	5, [ 0.03125,  0.8828125,  0.7890625,  0.2578125,  
+		0.1171875,  0.0625,  0 ],  
+	// Array
+	6, [ 0.0078125,  0.84375,  0.7578125,  0.203125,  
+		0.0390625,  0.0078125,  0 ],  
+	// Array
+	7, [ 0.546875,  0.5546875,  0.484375,  0.3984375,  
+		0.0,  0.0,  0.0,  0.0,  
+		0.0,  0.0,  0 ]
+];
+prUnarchive(o,p);
