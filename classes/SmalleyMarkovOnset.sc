@@ -1,3 +1,6 @@
+//A markov chain deciding which of Denis Smalley "Onset" Structual Functions are applied to the current synthesis envelope based
+//on Heretics's chosen "language type."
+
 SmalleyMarkovOnset{
 	var <>markov_instance, <>next_markov_instance, <>first_language_types, <>current_postures, next_markov_instance, <>next_markov_reduced;
 
@@ -13,7 +16,6 @@ SmalleyMarkovOnset{
 		^super.new.first_postures;
 
 	}
-
 
 	init {
 		^markov_instance =  MarkovSetN([

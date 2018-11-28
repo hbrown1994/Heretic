@@ -1,3 +1,5 @@
+//A markov chain takes the incoming "language type" from the neural network/the current "posture of interaction" and returns the computer's language time.
+
 BraxtonMorrisChoose{
 
 	classvar <>incoming_language_type=\0;

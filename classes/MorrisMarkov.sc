@@ -1,3 +1,5 @@
+//2nd order markov chain deciding the computer's posture of interaction based on the user's "posture of interaction" slider settings in the GUI. Various weights are embedded to control how many times certain "postures of interaction" may be repeated.
+
 MorrisMarkov{
 	var <>markov_instance, <>next_markov_instance, <>first_language_types, <>current_postures, next_markov_instance, <>next_markov_instance_no_recall;
 

@@ -1,3 +1,6 @@
+//A markov chain deciding which of Denis Smalley "Termination" Structual Functions are applied to the current synthesis envelope based
+//on Heretics's chosen "language type."
+
 SmalleyMarkovTerminate{
 	var <>markov_instance, <>next_markov_instance, <>first_language_types, <>current_postures, next_markov_instance, <>next_markov_reduced;
 
