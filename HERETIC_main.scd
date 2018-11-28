@@ -1,15 +1,3 @@
-//to do:
-//pedal for instant shifts
-//fix markovs to recude repeats: keep rweaking
-/*
-
-ERROR: Message 'choose' not understood.
-RECEIVER:
-   nil
-ARGS:
-PATH: /Users/hunterbrown/Desktop/Music_Tech_03-10-2018/HERETIC/triggers/trigger_12.scd
-
-*/
 
 (
 /*______________________________________________ 1. Server Configuration ______________________________________________*/
