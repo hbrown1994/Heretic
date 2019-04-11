@@ -1,4 +1,3 @@
-//Footpedla Connectivity
 
 Synth(\key);
 
@@ -11,25 +10,18 @@ Ndef(\oscValues_keys, {
 	SendReply.kr(trig_b, "/innerOscFlow_key_b", data_b);
 });
 
-
 (
 	OSCFunc({ arg msg;
-		~a_trig = msg[3];
+		if(msg[3] > 0.5, {"kill language".postln;  ~language_type_routine.stop; ~incoming_language_type=\0;}, {nil});
+		if(msg[3]  < 0.5, {"get_language".postln; e[\get_language].value}, {nil});
 	}, "/innerOscFlow_key_a");
 );
 
-(
-	OSCFunc({ arg msg;
-		~b_trig = msg[3];
-	}, "/innerOscFlow_key_b");
-);
+/*(
+OSCFunc({ arg msg;
+if(msgaaaaaaaaaaaaaaaaaaaa[3] == 1, {e[\build].value}, {nil});
+if(msg[3aa]  == 0, {e[\release].value}, {nil});
+}, "/innerOscFlow_key_b");a
+);*/
 
-~key_triggers = Routine({
 
-	loop{
-		if(~a_trig == 1, {e[\release].value}, {nil});
-		if(~b_trig == 1, {e[\build].value}, {nil});
-
-		0.5.wait;
-	}
-}).play(SystemClock);

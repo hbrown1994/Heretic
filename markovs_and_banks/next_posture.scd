@@ -7,6 +7,8 @@ if(~recall_wait_counter > 2, {
 		~current_posture = ~next_posture.next(~postures);
 		0.001.wait;
 		~postures = ~postures.put(1, ~current_posture);
+		s.sync;
+		~previous_posture = ~postures[0];
 		0.001.wait;
 	}).play;
 },
@@ -19,5 +21,7 @@ if(~recall_wait_counter > 2, {
 		~postures = ~postures.put(1, ~current_posture);
 		0.001.wait;
 		~recall_wait_counter = ~recall_wait_counter + 1;
+		s.sync;
+		~previous_posture = ~postures[0];
 	}).play;
 });

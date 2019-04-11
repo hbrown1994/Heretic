@@ -14,6 +14,7 @@
 ~drones_out = Bus.audio(s, 2);
 ~live_processing_out = Bus.audio(s, 2);
 
+
 // Control Busses
 ~mfcc_bus = Bus.control(s, 13);
 ~mfcc_bus_out = Bus.control(s, 2);
@@ -27,6 +28,9 @@
 ~regress_bus_out = Bus.control(s, 17);
 ~trig_bus = Bus.control(s, 1);
 ~language_bus_out= Bus.control(s, 2);
+~kick_onset_send  = Bus.control(s, 1);
+
+~onset_sends = Bus.control(s, 1);
 
 // Key State Busses
 ~a_key_bus = Bus.control(s, 1);

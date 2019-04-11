@@ -83,12 +83,7 @@ StaticText(w, Rect(614, 280,200,30))
 .font_(Font(size: 18));
 
 // Composite View 4 ------------------------------------------
-StaticText(w, Rect(490,470,90,100))
-.string_("Dry Drum Sound")
-.align_(\center)
-.front
-.stringColor_(Color(1, 1, 1))
-.font_(Font(size: 30));
+
 
 StaticText(w, Rect(3,400,60,30))
 .string_("OH L")
@@ -278,8 +273,19 @@ Array.fill(8, {NumberBox(c[4], 50@20)});
 c[4].decorator_(FlowLayout(c[4].bounds, 20@25, 30@0)); // Array 0
 Array.fill(7, {Knob(c[4], 30@30)});
 
-c[4].decorator_(FlowLayout(c[4].bounds, 510@10, 4@0)); // A
+c[4].decorator_(FlowLayout(c[4].bounds, 545@5, 4@0)); // A
 Array.fill(1, {Button(c[4], 50@50).font_(Font(size: 15)).states_([["Mono", Color.black, Color.gray(0.8)]])});
+
+c[4].decorator_(FlowLayout(c[4].bounds, 490@55, 10@0)); // Array 0
+c[4].background_(Color(0, 0, 0));
+
+Array.fill(1, {Slider(c[4], 50@120)});
+c[4].decorator.nextLine;
+Array.fill(1, {NumberBox(c[4], 50@20)});
+
+c[4].decorator_(FlowLayout(c[4].bounds, 490@5, 4@0)); // A
+Array.fill(1, {Button(c[4], 50@20).font_(Font(size: 15)).states_([["Onset", Color.black, Color.gray(0.8)], ["Off",  Color.black, Color(1,0,0)]])});
+
 
 // Composite View 5: Computer Output Mixing  ------------------------------------------
 c[5].decorator_(FlowLayout(c[5].bounds, 9@55, 35@0)); // Array 0
@@ -627,7 +633,7 @@ Array.fill(1, {Button(c[5], 50@50).font_(Font(size: 15)).states_([["Test", Color
 	drum_master_amp = obj.value.linlin(0.0,1.0, -60.0,-0.0);
 
 	if(~mics.isPlaying,
-		{~mics.set(\drum_master_amp, drum_master_amp)}
+		{~mics.set(\master_amp, drum_master_amp)}
 	);
 	~drum_master_numBox.value_(obj.value.linlin(0.0,1.0,-60.0,0.0));
 });
@@ -709,6 +715,32 @@ Array.fill(1, {Button(c[5], 50@50).font_(Font(size: 15)).states_([["Test", Color
 		{~mics.set(\floor_pan, floor_pan)}
 	);
 });
+
+~percussion_onset_slider= c[4].children[24].action_({
+	arg obj;
+	var thresh=0.0;
+	thresh = obj.value;
+
+	if(~mics.isPlaying,
+		{~mics.set(\thresh, thresh)}
+	);
+	~percussion_onset_numBox.value_(obj.value);
+});
+
+~percussion_onset_numBox = c[4].children[25]
+.decimals_(3)
+.action_({
+	arg obj;
+	~percussion_onset_slider.valueAction_(obj.value)
+});
+
+
+~percussion_onset_test_trig = c[4].children[26]
+.action_({
+	arg obj;
+	if(obj.value == 1, {e[\drum_onset_test].value},{e[\drum_onset_test_off].value});
+});
+
 
 
 

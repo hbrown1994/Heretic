@@ -6,7 +6,9 @@ SynthDef(\pulse_1, {
 
 	env = EnvGen.kr(Env.dadsr(del, atk, 0.01, 1, rel, 1, [0, 9, 9, prolongation], bias), gate, doneAction: 2)!2;
 
-	sig = SwitchDelay.ar(in, 0, 1, Select.kr( Stepper.kr(Impulse.kr(1), 0, 0, 10), [Array.rand(10, 0.2, 1.5)]), delayfactor);
+	sig = SwitchDelay.ar(in, 0, 1, Select.kr( Stepper.kr(Impulse.kr(1), 0, 0, 4), [Array.rand(4, 0.2, 1.5)]), delayfactor);
+
+	sig = Splay.ar(sig);
 
 	sig = sig * amp.dbamp.lag(0.1) * env;
 

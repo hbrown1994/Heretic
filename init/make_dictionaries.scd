@@ -32,6 +32,7 @@
 ~pattern_bank_12 = Dictionary.new;
 
 //Unison Synth Instances
+~unison_bank_0 = Dictionary.new;
 ~unison_bank_1 = Dictionary.new;
 ~unison_bank_2 = Dictionary.new;
 ~unison_bank_3 = Dictionary.new;

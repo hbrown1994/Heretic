@@ -1,11 +1,27 @@
 //drone_formings
-
 ~unison_bank_2.add(\0-> {
-	Synth(\ntube_1, [\amp, -20, \loss, 0.999, \in, ~sum_out_send, \out, ~outbus_count, \atk, ~onset_12, \rel, ~terminate_12, \delay, ~delay_12, \prolongation, ~prolongation_12, \gate, 1], target: ~live_processing_node).register;
+   Synth(\verb, [\amp, -6,
+
+	\time, 20.0, \damp, 0.0, \size, 3.0,  \earlyDiff, 0.707,
+	\modDepth, 1.0, \modFreq, 5,
+	\low, 0.6,  \mid,0.9, \high, 0.9, \lowcut, 300, \highcut, 12000,
+	\hpf_freq, 200,
+
+	\in, ~sum_out_send, \out,  ~outbus_processing,
+	\atk, ~onset_time_12, \rel, ~terminate_time_12,  ~prolongation_12,
+	\gate, 1
+
+], target: ~live_processing_node).register;
 });
+
 
 ~unison_bank_2.add(\1-> {
-	Synth(\greyhole_1, [\amp, -6, \size, 1, \fb, 0.8, \damping, 0.4, \in, ~sum_out_send, \out, ~outbus_count, \atk, ~onset_12, \rel, ~terminate_12, \delay, ~delay_12, \prolongation, ~prolongation_12, \gate, 1], target: ~live_processing_node).register;
+	Synth(\greyhole_1, [\amp, -6, \size, 1, \fb, 0.8, \damping, 0.4, \in, ~sum_out_send, \out,  ~outbus_processing, \atk, ~onset_time_12, \rel, ~terminate_time_12,  ~prolongation_12, \gate, 1], target: ~live_processing_node).register;
 });
+
+
+
+
+
 
 

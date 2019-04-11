@@ -4,15 +4,32 @@
 
 ~pattern_bank_2.add(\0-> {
 	Routine({
-		currentEnvironment.put(("pattern_bus_"++~synth_counter.asString).asSymbol, Bus.audio(s, 2));
+		 var this_synth = ~synth_counter, dur_continuant_1=0, dur_continuant_2=0, continuant, dur_env_1, atk_env_1, rel_env_1, filter_env_1, dur_env_2, atk_env_2, rel_env_2, filter_env_2;
+		    var dur_high_1 = 0.5, dur_low_1 = 5.0, dur_med_1 = [dur_high_1, dur_low_1].mean;
+            var dur_high_2 = 2.0, dur_low_2 = 8.0, dur_med_2 = [dur_high_2, dur_low_2].mean;
+		    var filter_high_1=5000, filter_low_1=100, filter_med_1 = [filter_high_1, filter_low_1].mean;
+		    var set_onset=~onset_2, set_continuation=~set_continuation.next(\2), set_termination=~terminate_2;
+		    var onset_time=~onset_time_2, continuation_time=currentEnvironment.at(("synth_duration_"++this_synth.asString).asSymbol), termination_time=~terminate_time_2;
+
+		currentEnvironment.put(("pattern_bus_"++this_synth.asString).asSymbol, Bus.audio(s, 2));
 		s.sync;
-		currentEnvironment.put(("pattern_instance_"++~synth_counter.asString).asSymbol, Pdef(
+		dur_env_1 = SmalleyPatternOnset.setPatternOnset(set_onset, dur_low_1, dur_med_1, dur_high_1)++SmalleyPatternContinuation.setPatternContinuation(set_continuation, set_onset, dur_low_1, dur_med_1, dur_high_1)++SmalleyPatternTerminate.setPatterntermination(set_termination, set_continuation, dur_low_1, dur_med_1, dur_high_1);
+
+		filter_env_1 = SmalleyPatternOnset.setPatternOnset(set_onset, filter_low_1, filter_med_1, filter_high_1)++SmalleyPatternContinuation.setPatternContinuation(set_continuation, set_onset, filter_low_1, filter_med_1, filter_high_1)++SmalleyPatternTerminate.setPatterntermination(set_termination, set_continuation, filter_low_1, filter_med_1, filter_high_1);
+
+
+		dur_env_2=dur_env_1.replace(dur_high_1, dur_high_2);
+		dur_env_2=dur_env_2.replace(dur_med_1, dur_med_2);
+		dur_env_2=dur_env_2.replace(dur_low_1, dur_low_2);
+
+		s.sync;
+		currentEnvironment.put(("pattern_instance_"++this_synth.asString).asSymbol, Pdef(
 			\metal1,
 			Pbind(
 				\instrument, \pattern_buf,
-				\dur, Pwhite(0.5, 2),
-				\atk, Pwhite(1, 5),
-				\rel, Pwhite(10, 30),
+				\dur, Pwhite(Env(dur_env_1, [onset_time, currentEnvironment.at(("synth_duration_"++this_synth.asString).asSymbol), termination_time], [\lin, \exp, \sin, \wel, \sqr, \cub].choose), Env(dur_env_2, [onset_time,  currentEnvironment.at(("synth_duration_"++this_synth.asString).asSymbol), termination_time], [\lin, \exp, \sin, \wel, \sqr, \cub].choose)),
+				\atk, Pwhite(10.0, 20.0),
+				\rel, Pwhite(10.0, 30.0),
 				\buf, Prand(m[\tb_cym][(0..(m[\tb_cym].size-1))], inf),
 				\rate, Prand([Pexprand(-0.1, -0.6), Pwhite(0.1, 0.6)], inf),
 				\spos, Pwhite(0, s.sampleRate*240),
@@ -20,10 +37,10 @@
 				\loop, 0,
 				\pan_pos, Pwhite(-1.0, 1.0),
 				\low_pass_mix, 1,
-				\low_pass_freq, 20000,
+				\low_pass_freq, Env(filter_env_1, [onset_time, currentEnvironment.at(("synth_duration_"++this_synth.asString).asSymbol), termination_time], [\lin, \exp, \sin, \wel, \sqr, \cub].choose),
 				\high_pass_mix, 1,
-				\high_pass_freq, 30,
-				\out, currentEnvironment.at(("pattern_bus_"++~synth_counter.asString).asSymbol),
+				\high_pass_freq, 20,
+				\out, currentEnvironment.at(("pattern_bus_"++this_synth.asString).asSymbol),
 				\group, ~pattern_node,
 			);
 		).play;
@@ -31,7 +48,7 @@
 
 		s.sync;
 
-		currentEnvironment.at(("synth_instance_"++~synth_counter.asString).asSymbol).set(\input_bus, currentEnvironment.at(("pattern_bus_"++~synth_counter.asString).asSymbol))
+		currentEnvironment.at(("synth_instance_"++this_synth.asString).asSymbol).set(\input_bus, currentEnvironment.at(("pattern_bus_"++this_synth.asString).asSymbol));
 
 	}).play(SystemClock);
 
@@ -40,26 +57,42 @@
 
 ~pattern_bank_2.add(\1-> {
 	Routine({
-		currentEnvironment.put(("pattern_bus_"++~synth_counter.asString).asSymbol, Bus.audio(s, 2));
+		 var this_synth = ~synth_counter, dur_continuant_1=0, dur_continuant_2=0, continuant, dur_env_1, atk_env_1, rel_env_1, filter_env_1, dur_env_2, atk_env_2, rel_env_2, filter_env_2;
+		    var dur_high_1 = 0.5, dur_low_1 = 5.0, dur_med_1 = [dur_high_1, dur_low_1].mean;
+            var dur_high_2 = 2.0, dur_low_2 = 8.0, dur_med_2 = [dur_high_2, dur_low_2].mean;
+		    var filter_high_1=5000, filter_low_1=400, filter_med_1 = [filter_high_1, filter_low_1].mean;
+		    var set_onset=~onset_2, set_continuation=~set_continuation.next(\2), set_termination=~terminate_2;
+		    var onset_time=~onset_time_2, continuation_time=currentEnvironment.at(("synth_duration_"++this_synth.asString).asSymbol), termination_time=~terminate_time_2;
+
+		currentEnvironment.put(("pattern_bus_"++this_synth.asString).asSymbol, Bus.audio(s, 2));
 		s.sync;
-		currentEnvironment.put(("pattern_instance_"++~synth_counter.asString).asSymbol, Pdef(
+		dur_env_1 = SmalleyPatternOnset.setPatternOnset(set_onset, dur_low_1, dur_med_1, dur_high_1)++SmalleyPatternContinuation.setPatternContinuation(set_continuation, set_onset, dur_low_1, dur_med_1, dur_high_1)++SmalleyPatternTerminate.setPatterntermination(set_termination, set_continuation, dur_low_1, dur_med_1, dur_high_1);
+		filter_env_1 = SmalleyPatternOnset.setPatternOnset(set_onset, filter_low_1, filter_med_1, filter_high_1)++SmalleyPatternContinuation.setPatternContinuation(set_continuation, set_onset, filter_low_1, filter_med_1, filter_high_1)++SmalleyPatternTerminate.setPatterntermination(set_termination, set_continuation, filter_low_1, filter_med_1, filter_high_1);
+
+
+		dur_env_2=dur_env_1.replace(dur_high_1, dur_high_2);
+		dur_env_2=dur_env_2.replace(dur_med_1, dur_med_2);
+		dur_env_2=dur_env_2.replace(dur_low_1, dur_low_2);
+
+		s.sync;
+		currentEnvironment.put(("pattern_instance_"++this_synth.asString).asSymbol, Pdef(
 			\metal2,
 			Pbind(
 				\instrument, \pattern_buf,
-				\dur, Pwhite(0.5, 2),
-				\atk, Pwhite(5, 10),
-				\rel, Pwhite(10, 30),
+				 \dur, Pwhite(Env(dur_env_1, [onset_time, currentEnvironment.at(("synth_duration_"++this_synth.asString).asSymbol), termination_time], [\lin, \exp, \sin, \wel, \sqr, \cub].choose), Env(dur_env_2, [onset_time,  currentEnvironment.at(("synth_duration_"++this_synth.asString).asSymbol), termination_time], [\lin, \exp, \sin, \wel, \sqr, \cub].choose)),
+				\atk, Pwhite(10.0, 20.0),
+				\rel, Pwhite(10.0, 30.0),
 				\buf, Prand(m[\bowed_cymbal][(0..(m[\bowed_cymbal].size-1))], inf),
 				\rate, Prand([Pexprand(-0.1, -0.6), Pwhite(0.1, 0.6)], inf),
-				\spos, Pwhite(0, 3000),
+				\spos, Pwhite(0, 2000),
 				\amp, 0,
-				\loop, 0,
+				\loop, 1,
 				\pan_pos, Pwhite(-1.0, 1.0),
 				\low_pass_mix, 1,
-				\low_pass_freq, 20000,
+				\low_pass_freq,  Env(filter_env_1, [onset_time, currentEnvironment.at(("synth_duration_"++this_synth.asString).asSymbol), termination_time], [\lin, \exp, \sin, \wel, \sqr, \cub].choose),
 				\high_pass_mix, 1,
 				\high_pass_freq, 30,
-				\out, currentEnvironment.at(("pattern_bus_"++~synth_counter.asString).asSymbol),
+				\out, currentEnvironment.at(("pattern_bus_"++this_synth.asString).asSymbol),
 				\group, ~pattern_node,
 			);
 		).play;
@@ -67,7 +100,7 @@
 
 		s.sync;
 
-		currentEnvironment.at(("synth_instance_"++~synth_counter.asString).asSymbol).set(\input_bus, currentEnvironment.at(("pattern_bus_"++~synth_counter.asString).asSymbol))
+		currentEnvironment.at(("synth_instance_"++this_synth.asString).asSymbol).set(\input_bus, currentEnvironment.at(("pattern_bus_"++this_synth.asString).asSymbol));
 
 	}).play(SystemClock);
 
@@ -76,15 +109,31 @@
 
 ~pattern_bank_2.add(\2-> {
 	Routine({
-		currentEnvironment.put(("pattern_bus_"++~synth_counter.asString).asSymbol, Bus.audio(s, 2));
+		var this_synth = ~synth_counter, dur_continuant_1=0, dur_continuant_2=0, continuant, dur_env_1, atk_env_1, rel_env_1, filter_env_1, dur_env_2, atk_env_2, rel_env_2, filter_env_2;
+		    var dur_high_1 = 0.5, dur_low_1 = 5.0, dur_med_1 = [dur_high_1, dur_low_1].mean;
+            var dur_high_2 = 2.0, dur_low_2 = 8.0, dur_med_2 = [dur_high_2, dur_low_2].mean;
+		    var filter_high_1=5000, filter_low_1=400, filter_med_1 = [filter_high_1, filter_low_1].mean;
+		    var set_onset=~onset_2, set_continuation=~set_continuation.next(\2), set_termination=~terminate_2;
+		    var onset_time=~onset_time_2, continuation_time=currentEnvironment.at(("synth_duration_"++this_synth.asString).asSymbol), termination_time=~terminate_time_2;
+
+		currentEnvironment.put(("pattern_bus_"++this_synth.asString).asSymbol, Bus.audio(s, 2));
 		s.sync;
-		currentEnvironment.put(("pattern_instance_"++~synth_counter.asString).asSymbol, Pdef(
-			\metal2,
+		dur_env_1 = SmalleyPatternOnset.setPatternOnset(set_onset, dur_low_1, dur_med_1, dur_high_1)++SmalleyPatternContinuation.setPatternContinuation(set_continuation, set_onset, dur_low_1, dur_med_1, dur_high_1)++SmalleyPatternTerminate.setPatterntermination(set_termination, set_continuation, dur_low_1, dur_med_1, dur_high_1);
+		filter_env_1 = SmalleyPatternOnset.setPatternOnset(set_onset, filter_low_1, filter_med_1, filter_high_1)++SmalleyPatternContinuation.setPatternContinuation(set_continuation, set_onset, filter_low_1, filter_med_1, filter_high_1)++SmalleyPatternTerminate.setPatterntermination(set_termination, set_continuation, filter_low_1, filter_med_1, filter_high_1);
+
+
+		dur_env_2=dur_env_1.replace(dur_high_1, dur_high_2);
+		dur_env_2=dur_env_2.replace(dur_med_1, dur_med_2);
+		dur_env_2=dur_env_2.replace(dur_low_1, dur_low_2);
+
+		s.sync;
+		currentEnvironment.put(("pattern_instance_"++this_synth.asString).asSymbol, Pdef(
+			\metal3,
 			Pbind(
 				\instrument, \pattern_buf,
-				\dur, Pwhite(0.5, 2),
-				\atk, Pwhite(5, 10),
-				\rel, Pwhite(10, 30),
+				 \dur,  Pwhite(Env(dur_env_1, [onset_time, currentEnvironment.at(("synth_duration_"++this_synth.asString).asSymbol), termination_time], [\lin, \exp, \sin, \wel, \sqr, \cub].choose), Env(dur_env_2, [onset_time,  currentEnvironment.at(("synth_duration_"++this_synth.asString).asSymbol), termination_time], [\lin, \exp, \sin, \wel, \sqr, \cub].choose)),
+				\atk, Pwhite(10.0, 20.0),
+				\rel, Pwhite(10.0, 30.0),
 				\buf, Prand(m[\gong][(0..(m[\gong].size-1))], inf),
 				\rate, Prand([Pexprand(-0.6, -1.2), Pwhite(0.6, 1.2)], inf),
 				\spos, Pwhite(0, s.sampleRate*201),
@@ -92,10 +141,10 @@
 				\loop, 0,
 				\pan_pos, Pwhite(-1.0, 1.0),
 				\low_pass_mix, 1,
-				\low_pass_freq, 20000,
+				\low_pass_freq, Env(filter_env_1, [onset_time, currentEnvironment.at(("synth_duration_"++this_synth.asString).asSymbol), termination_time], [\lin, \exp, \sin, \wel, \sqr, \cub].choose),
 				\high_pass_mix, 1,
 				\high_pass_freq, 30,
-				\out, currentEnvironment.at(("pattern_bus_"++~synth_counter.asString).asSymbol),
+				\out, currentEnvironment.at(("pattern_bus_"++this_synth.asString).asSymbol),
 				\group, ~pattern_node,
 			);
 		).play;
@@ -103,7 +152,7 @@
 
 		s.sync;
 
-		currentEnvironment.at(("synth_instance_"++~synth_counter.asString).asSymbol).set(\input_bus, currentEnvironment.at(("pattern_bus_"++~synth_counter.asString).asSymbol))
+		currentEnvironment.at(("synth_instance_"++this_synth.asString).asSymbol).set(\input_bus, currentEnvironment.at(("pattern_bus_"++this_synth.asString).asSymbol));
 
 	}).play(SystemClock);
 
@@ -112,30 +161,54 @@
 
 ~pattern_bank_2.add(\3-> {
 	Routine({
-		currentEnvironment.put(("pattern_bus_"++~synth_counter.asString).asSymbol, Bus.audio(s, 2));
+		var this_synth = ~synth_counter, dur_continuant_1=0, dur_continuant_2=0, continuant, dur_env_1, atk_env_1, rel_env_1, filter_env_1, dur_env_2, atk_env_2, rel_env_2, filter_env_2;
+		    var dur_high_1 = 0.5, dur_low_1 = 5.0, dur_med_1 = [dur_high_1, dur_low_1].mean;
+            var dur_high_2 = 2.0, dur_low_2 = 8.0, dur_med_2 = [dur_high_2, dur_low_2].mean;
+		    var filter_high_1=5000, filter_low_1=100, filter_med_1 = [filter_high_1, filter_low_1].mean;
+		    var set_onset=~onset_2, set_continuation=~set_continuation.next(\2), set_termination=~terminate_2;
+		    var onset_time=~onset_time_2, continuation_time=currentEnvironment.at(("synth_duration_"++this_synth.asString).asSymbol), termination_time=~terminate_time_2;
+
+		currentEnvironment.put(("pattern_bus_"++this_synth.asString).asSymbol, Bus.audio(s, 2));
 		s.sync;
-		currentEnvironment.put(("pattern_instance_"++~synth_counter.asString).asSymbol, Pdef(
-			\sinepat,
+		dur_env_1 = SmalleyPatternOnset.setPatternOnset(set_onset, dur_low_1, dur_med_1, dur_high_1)++SmalleyPatternContinuation.setPatternContinuation(set_continuation, set_onset, dur_low_1, dur_med_1, dur_high_1)++SmalleyPatternTerminate.setPatterntermination(set_termination, set_continuation, dur_low_1, dur_med_1, dur_high_1);
+		filter_env_1 = SmalleyPatternOnset.setPatternOnset(set_onset, filter_low_1, filter_med_1, filter_high_1)++SmalleyPatternContinuation.setPatternContinuation(set_continuation, set_onset, filter_low_1, filter_med_1, filter_high_1)++SmalleyPatternTerminate.setPatterntermination(set_termination, set_continuation, filter_low_1, filter_med_1, filter_high_1);
+
+
+		dur_env_2=dur_env_1.replace(dur_high_1, dur_high_2);
+		dur_env_2=dur_env_2.replace(dur_med_1, dur_med_2);
+		dur_env_2=dur_env_2.replace(dur_low_1, dur_low_2);
+
+		s.sync;
+		currentEnvironment.put(("pattern_instance_"++this_synth.asString).asSymbol, Pdef(
+			\metal4,
 			Pbind(
-				\instrument, \pattern_sine, // chooses instrument
-				\dur, Pexprand(0.5, 2, inf), //Pwhite creates linear random numbers
-				\octave, Prand([0.5, 1, 2, 3], inf),
-				\c1, Pwrand(Array.series(8, 1, 1), [1, 1, 1, 4, 3, 2, 1, 4].normalizeSum, inf),
-				\c2, Pwrand(Array.series(8, -1, -1), [1, 1, 1, 4, 3, 2, 1, 4].normalizeSum, inf), //neg
-				\freq, Pseq([58, 63, 68, 73, 60, 66, 71, 76, 59, 64, 69, 73, 56, 62, 67, 72, 55, 60, 65, 70, 55, 60, 64, 71, 54, 60, 63, 70 , 54, 59, 62, 69, 56, 62, 67, 72, 55, 62, 65, 72, 58, 64, 68, 73, 58, 63, 68, 73, 56, 51, 67, 72, 56, 62, 67, 72], inf).midicps,//Pexprand produces exponentioal random numbers within the range for 'x' amount of times.
-				\atk, Pwhite(7.0, 15.0, inf),
-				\rel, Pwhite(7.0, 15.0, inf),
-				\amp, 0.4,
-				\pan, Pwhite(-1.0, 1.0, inf),
-				\out, currentEnvironment.at(("pattern_bus_"++~synth_counter.asString).asSymbol),
+				\instrument, \pattern_buf,
+				\dur, Pwhite(Env(dur_env_1, [onset_time, currentEnvironment.at(("synth_duration_"++this_synth.asString).asSymbol), termination_time], [\lin, \exp, \sin, \wel, \sqr, \cub].choose), Env(dur_env_2, [onset_time,  currentEnvironment.at(("synth_duration_"++this_synth.asString).asSymbol), termination_time], [\lin, \exp, \sin, \wel, \sqr, \cub].choose)),
+				\atk, Pwhite(10.0, 20.0),
+				\rel, Pwhite(10.0, 30.0),
+				\buf, Pxrand(m[\superball][(0..(m[\superball].size-1))], inf),
+				\rate, Pxrand([Pexprand(-0.3, -0.8), Pwhite(0.3, 0.8)], inf),
+				\spos, Pwhite(0, s.sampleRate*11),
+				\amp, 0,
+				\loop, 1,
+				\pan_pos, Pwhite(-1.0, 1.0),
+				\low_pass_mix, 1,
+				\low_pass_freq, Env(filter_env_1, [onset_time, currentEnvironment.at(("synth_duration_"++this_synth.asString).asSymbol), termination_time], [\lin, \exp, \sin, \wel, \sqr, \cub].choose),
+				\high_pass_mix, 1,
+				\high_pass_freq, 30,
+				\out, currentEnvironment.at(("pattern_bus_"++this_synth.asString).asSymbol),
+				\group, ~pattern_node,
 			);
 		).play;
 		);
 
 		s.sync;
 
-		currentEnvironment.at(("synth_instance_"++~synth_counter.asString).asSymbol).set(\input_bus, currentEnvironment.at(("pattern_bus_"++~synth_counter.asString).asSymbol))
+		currentEnvironment.at(("synth_instance_"++this_synth.asString).asSymbol).set(\input_bus, currentEnvironment.at(("pattern_bus_"++this_synth.asString).asSymbol));
 
 	}).play(SystemClock);
 
 });
+
+
+

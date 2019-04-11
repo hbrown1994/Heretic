@@ -5,11 +5,11 @@ SynthDef(\concat_delay, {
 	in = In.ar(input);
 	env = EnvGen.kr(Env.dadsr(del, atk, 0.01, 1, rel, 1, [0, 9, 9, prolongation], bias), gate, doneAction: 2);
 
-	concat=PlayBuf.ar(1, bufnum, BufRateScale.kr(bufnum), loop:1);
+	concat=PlayBuf.ar(1, bufnum, LFNoise1.kr(0.5).range(1.0, 2.0), BufRateScale.kr(bufnum), loop:1);
 
 	sig = Concat2.ar(in, concat, storesize: 14.753129251701, seektime: 14.753129251701, seekdur: 14.753129251701, matchlength: matchlength, freezestore: 0, zcr: zcr, lms: lms, sc: sc, st: st, randscore: 0, threshold: 0.01, mul: 1, add: 0);
 
-	sig = AllpassL.ar(sig, 7, TRand.kr(1, 7, Dust.kr(0.5)).lag(2))!2;
+	sig = AllpassL.ar(sig, 7, TRand.kr(1, 7, Dust.kr(0.5)).lag(2), mul: 0.3)!2;
 
 	sig = sig * amp.dbamp.lag(0.1) * env;
 

@@ -20,16 +20,12 @@ SynthDef(\glitch_delay, {
 
 	chainA = FFT(LocalBuf(1024), sig1);
 	chainB = FFT(LocalBuf(1024), sig1);
-	chainA = PV_BinScramble(chainA, RMS.ar(in).linlin(0.0, 0.1, 0.0, 0.3), 0.5, trig);
+	chainA = PV_BinShift(chainB, RMS.ar(in).linlin(0.0, 0.1, 1.0, 3.0));
 	chainA = PV_Freeze(chainA, ToggleFF.kr(trig2));
-	chainB = PV_MagSmooth(chainB, 1 - RMS.ar(in).linlin(0.0, 0.1, 0.00001, 0.5));
-	chainB = PV_MagSmear(chainB, RMS.ar(in).linlin(0.0, 0.1, 0.00001, 100));
-	chainB = PV_BinShift(chainB, RMS.ar(in).linlin(0.0, 0.1, 0.25, 0.5));
 
-	chain = PV_Morph(chainB, chainA, RMS.ar(in).linlin(0.0, 0.1, 0.0, morph_amount));
-	sig3 = IFFT(chain);
+	sig3 = IFFT(chainA);
 	sig3 = Limiter.ar(sig3, 1.0);
 	sig3 = sig3 * env * amp.dbamp.lag(0.1);
-	Out.ar(out, Pan2.ar(sig3, LFNoise1.kr(Clip.kr(RMS.ar(in).linlin(0.0, 0.1, 2.0, 20.0), 2.0, 20.0))));
+	Out.ar(out, Pan2.ar(sig3, LFNoise1.kr(Clip.kr(RMS.ar(in).linlin(0.0, 0.1, 0.001, 20.0), 0.001, 20.0))));
 
 }).add;

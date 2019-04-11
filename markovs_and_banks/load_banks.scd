@@ -28,10 +28,9 @@ thisProcess.interpreter.executeFile(~pattern_file_path++"pattern_bank_7.scd");
 thisProcess.interpreter.executeFile(~pattern_file_path++"pattern_bank_8.scd");
 thisProcess.interpreter.executeFile(~pattern_file_path++"pattern_bank_9.scd");
 thisProcess.interpreter.executeFile(~pattern_file_path++"pattern_bank_10.scd");
-thisProcess.interpreter.executeFile(~pattern_file_path++"pattern_bank_11.scd");
-thisProcess.interpreter.executeFile(~pattern_file_path++"pattern_bank_12.scd");
 
 //Load Unison Synth Banks -> Add to Dictionary
+thisProcess.interpreter.executeFile(~unison_file_path++"unison_bank_0.scd");
 thisProcess.interpreter.executeFile(~unison_file_path++"unison_bank_1.scd");
 thisProcess.interpreter.executeFile(~unison_file_path++"unison_bank_2.scd");
 thisProcess.interpreter.executeFile(~unison_file_path++"unison_bank_3.scd");

@@ -1,0 +1,1 @@
+~onset_test_percussion = Synth(\onset_test, [\in, ~onset_sends, \out, ~dry_out], ~live_processing_node).register;

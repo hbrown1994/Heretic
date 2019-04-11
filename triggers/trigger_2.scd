@@ -1,96 +1,54 @@
 Routine({
 
-	var this_onset = ~set_onset.next(\2).postln, this_terminate = ~set_terminate.next(\2).postln, this_synth, prolong_term;
+	var this_synth, this_synth_count=~synth_counter;
 
-	//Set ONSET/delay
+	if(~trigger_2_count == ~synth_bank_2.size, {~trigger_2_count=0;}, {nil});
 
 	s.sync;
 
-	~synth_counter = ~synth_counter + 1;
+	~onset_2 = ~set_onset.next(\1);
 
-	this_onset.postln;
+	~terminate_2 = ~set_terminate.next(\1);
 
-	if(this_onset == \delay,
-		{
-			~delay_2 = ~delay_time.choose;
+	~continuation_2 = ~set_continuation.next(\1);
 
-			~onset_2 =  switch (~set_onset_no_delay.next(\2),
-				\attack,   {~attack_time},
-				\emergence, { ~emergence_time.choose },
-				\anacrusis, { ~anacrusis_time.choose },
-				\upbeat, { ~upbeat_time.choose },
-			);
-		},
 
-		{
-			~delay_2 = 0;
-
-			~onset_2 =  switch (this_onset,
-				\attack,   {~attack_time},
-				\emergence, { ~emergence_time.choose },
-				\anacrusis, { ~anacrusis_time.choose },
-				\upbeat, { ~upbeat_time.choose },
-			);
-		}
+	~onset_time_2=  switch (~onset_2,
+		\attack,   {~attack_time},
+		\emergence, { ~emergence_time.choose },
+		\anacrusis, { ~anacrusis_time.choose },
+		\upbeat, { ~upbeat_time.choose },
+		\downbeat, { ~downbeat_time.choose},
+		\departue, { ~departue_time.choose},
 	);
 
 	s.sync;
 
-	//Set termination/prolongation
-	if(this_terminate == \prolongation,
-		{
-
-			prolong_term = ~set_terminate_no_delay.next(\2);
-
-
-			Routine({
-				~terminate_2  = switch (prolong_term,
-					\arrival,   {~arrival_time.choose},
-					\dissappearance, { ~dissappearance_time.choose},
-					\release, { ~release_time.choose},
-					\closure, { ~closure_time},
-				);
-
-				s.sync;
-
-
-				~prolongation_2  = switch (prolong_term,
-					\arrival,   {20},
-					\dissappearance, { 0.5},
-					\release, { 10},
-					\closure, { 500},
-				);
-
-			}).play(SystemClock);
-
-
-		},
-
-		{
-			~prolongation_2 = (-8);
-
-			~terminate_2  = switch (this_terminate,
-				\arrival,   {~arrival_time.choose },
-				\dissappearance, { ~dissappearance_time.choose },
-				\release, { ~release_time.choose },
-				\closure, { ~closure_time},
-			);
-	});
-
+	~terminate_time_2  = switch (~terminate_2,
+		\arrival,   {~arrival_time.choose},
+		\dissappearance, { ~dissappearance_time.choose},
+		\release, { ~release_time.choose},
+		\closure, { ~closure_time},
+		\resolution,  { ~resolution_time.choose},
+		\plane, { ~plane_time.choose},
+	);
 
 	s.sync;
 
-	if(~outbus_count == 8, {~outbus_count=0}, {~outbus_count = ~outbus_count + 2});
-
-	s.sync;
-
-	this_synth = ~synth_bank_2.choose;
+	this_synth = ~synth_bank_2[~synth_bank_2_select[~trigger_2_count].asSymbol];
 
 	~recall_synth_array.add(this_synth);
 
 	s.sync;
 
-	currentEnvironment.put(("synth_instance_"++~synth_counter.asString).asSymbol, this_synth.value.set(\atk, ~onset_2, \rel, ~terminate_2, \del, ~delay_2, \prolongation, ~prolongation_2, \gate, 1));
+	currentEnvironment.put(("synth_instance_"++this_synth_count.asString).asSymbol, this_synth.value.set(\atk, if(~onset_2 == \downbeat, {0.01}, {if(~onset_2 == \departue, {0.01}, {~onset_time_2});}); , \rel, ~terminate_time_2, \gate, 1));
+÷
+	s.sync;
+
+	~synth_counter = ~synth_counter + 1;
+	~trigger_2_count = ~trigger_2_count + 1;
 
 }).play(SystemClock);
+
+
 
