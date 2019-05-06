@@ -1,9 +1,3 @@
-// conat loder
-//extend seqence wait time depending on lnaguage type? longer for sprase? etc?
-//s.record(numChannels: 6);
-NetAddr("localhost", 57120);
-NetAddr.langPort;
-~end=0;
 
 (
 /*______________________________________________ 1. Server Configuration ______________________________________________*/
@@ -21,6 +15,8 @@ o.numBuffers = 1024 * 16;
 o.memSize = 2.pow(20);
 
 /*______________________________________________ 2. initialize Global Variables/Arrays ______________________________________________*/
+
+~end=0;
 
 ~trigger_1_count = 0;
 ~trigger_2_count = 0;
