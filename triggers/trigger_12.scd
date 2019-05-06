@@ -2,7 +2,7 @@ Routine({
 
 	var this_synth, this_synth_count=~synth_counter, this_language_type=~incoming_language_type;
 
-	if(this_language_type==\0, {this_language_type=[\1, \2, \3, \4, \5].choose}, {nil});
+	if(this_language_type==\0, {this_language_type=[\1, \2, \3, \4, \5, \7, \9].choose}, {nil});
 
 	s.sync;
 

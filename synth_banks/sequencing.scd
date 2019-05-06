@@ -15,8 +15,7 @@ e.add(\silence_sequence-> {
 	currentEnvironment.put(("synth_routine_"++~synth_counter.asString).asSymbol,
 		Routine({
 			var synth_num = ~synth_counter;
-			~incoming_language_type.postln;
-			~current_posture.postln;
+			"silence".postln;
 			thisProcess.interpreter.executeFile(~synth_file_path++"synths_off.scd");
 			[e[\silence_follow].value, e[\silence_wait].value].choose;
 		}).play(SystemClock);
@@ -26,7 +25,7 @@ e.add(\silence_sequence-> {
 e.add(\silence_follow-> {
 	currentEnvironment.put(("silence_loop_wait_"++~silence_counter.asString).asSymbol,
 		Routine({
-			var this_langauge_type = ~incoming_language_type, hold=0.5, current_posture=~current_posture, this_silence=~silence_counter, previous_posture=~previous_posture;
+			var this_langauge_type = ~incoming_language_type, hold=7, current_posture=~current_posture, this_silence=~silence_counter, previous_posture=~previous_posture;
 			var sub_routine = Routine({
 				e[\synths_sequence_choose].value;
 				currentEnvironment.at(("silence_loop_wait_"++this_silence.asString).asSymbol).stop;
@@ -49,8 +48,6 @@ e.add(\silence_follow-> {
 e.add(\silence_wait-> {
 	Routine({
 		"silence_wait".postln;
-		~incoming_language_type.postln;
-		~current_posture.postln;
 		~set_LanguageTypeDuration.next(\0).choose.wait;
 		e[\synths_sequence_choose].value;
 	}).play(SystemClock)
@@ -66,10 +63,10 @@ e.add(\solo_sequence-> {
 			currentEnvironment.put(("synth_duration_"++synth_num.asString).asSymbol, ~set_LanguageTypeDuration.next(\10).choose);
 			s.sync;
 			~synth_trig[\10].value;
-			synth_num.postln;
+
 			currentEnvironment.at(("synth_duration_"++synth_num.asString).asSymbol).wait;
 			e[\synths_sequence_choose].value;
-			~over_lap_wait[[0, 1, 2, 3, 4].wchoose([0.05, 0.1, 0.2, 0.9, 0.5].normalizeSum)].choose.wait;
+			~over_lap_wait[[0, 1, 2, 3, 4, 5].wchoose([0.05, 0.2, 0.5, 0.6, 0.2, 0.1].normalizeSum)].choose.wait;
 			currentEnvironment.at(("synth_instance_"++synth_num.asString).asSymbol).set(\gate, 0);
 			if(currentEnvironment.at(("pattern_instance_"++synth_num.asString).asSymbol).isPlaying,
 				{currentEnvironment.at(("pattern_instance_"++synth_num.asString).asSymbol).stop}, {nil});
@@ -84,19 +81,16 @@ e.add(\solo_sequence-> {
 e.add(\unison_sequence-> {
 	currentEnvironment.put(("synth_routine_"++~synth_counter.asString).asSymbol,
 		Routine({
-			var hold=1, synth_num = ~synth_counter, this_langauge_type = ~incoming_language_type, this_synth_langauge_type = 0, current_posture=~current_posture, previous_posture=~previous_posture;
+			var hold=7, synth_num = ~synth_counter, this_langauge_type = ~incoming_language_type, this_synth_langauge_type = 0, current_posture=~current_posture, previous_posture=~previous_posture;
 			var loop_done = Condition(false);
 			var sub_routine;
 
 
-			currentEnvironment.put(("synth_duration_"++synth_num.asString).asSymbol, ~over_lap_wait[[0, 1, 2, 3, 4].wchoose([0.1, 0.2, 0.4, 0.8, 0.0].normalizeSum)].choose);
-
-			s.sync;
 
 			sub_routine= Routine({
 				e[\synths_sequence_choose].value;
 
-				currentEnvironment.at(("synth_duration_"++synth_num.asString).asSymbol).wait;
+				~over_lap_wait[[0, 1, 2, 3, 4, 5].wchoose([0.2, 0.2, 0.3, 0.5, 0.5, 0.0].normalizeSum)].choose.wait;
 				currentEnvironment.at(("synth_instance_"++synth_num.asString).asSymbol).set(\gate, 0);
 				if(currentEnvironment.at(("pattern_instance_"++synth_num.asString).asSymbol).isPlaying,
 					{currentEnvironment.at(("pattern_instance_"++synth_num.asString).asSymbol).stop}, {nil});
@@ -113,8 +107,10 @@ e.add(\unison_sequence-> {
 			synth_num.postln;
 			s.sync;
 
-			if(current_posture==\Complement,  {10.wait;}, {if(previous_posture==\Complement,  {10.wait;}, {s.sync;});});
-			if(current_posture==\Unison,  {10.wait;}, {if(previous_posture==\Unison,  {10.wait;}, {s.sync;});});
+			/*if(current_posture==\Complement,  {10.wait;}, {if(previous_posture==\Complement,  {10.wait;}, {s.sync;});});
+			if(current_posture==\Unison,  {10.wait;}, {if(previous_posture==\Unison,  {10.wait;}, {s.sync;});});*/
+
+			30.wait;
 
 			loop{
 
@@ -131,19 +127,15 @@ e.add(\unison_sequence-> {
 e.add(\complement_sequence-> {
 	currentEnvironment.put(("synth_routine_"++~synth_counter.asString).asSymbol,
 		Routine({
-			var hold=0.5, synth_num = ~synth_counter, this_langauge_type = ~incoming_language_type, this_synth_langauge_type = 0, current_posture=~current_posture, previous_posture=~previous_posture;
+			var hold=7, synth_num = ~synth_counter, this_langauge_type = ~incoming_language_type, this_synth_langauge_type = 0, current_posture=~current_posture, previous_posture=~previous_posture;
 			var loop_done = Condition(false);
 			var sub_routine;
 
 
-			currentEnvironment.put(("synth_duration_"++synth_num.asString).asSymbol, ~over_lap_wait[[0, 1, 2, 3, 4].wchoose([0.1, 0.2, 0.4, 0.8, 0.0].normalizeSum)].choose);
-
-			s.sync;
-
 			sub_routine = Routine({
 				e[\synths_sequence_choose].value;
 
-				currentEnvironment.at(("synth_duration_"++synth_num.asString).asSymbol).wait;
+				~over_lap_wait[[0, 1, 2, 3, 4, 5].wchoose([0.2, 0.2, 0.2, 0.3, 0.8, 0.0].normalizeSum)].choose.wait;
 				currentEnvironment.at(("synth_instance_"++synth_num.asString).asSymbol).set(\gate, 0);
 				if(currentEnvironment.at(("pattern_instance_"++synth_num.asString).asSymbol).isPlaying,
 					{currentEnvironment.at(("pattern_instance_"++synth_num.asString).asSymbol).stop}, {nil});
@@ -153,7 +145,7 @@ e.add(\complement_sequence-> {
 			});
 
 			"\complement_sequence".postln;
-			this_synth_langauge_type = BraxtonMorrisChoose.setLanguageType(this_langauge_type, current_posture);
+			this_synth_langauge_type = BraxtonMorrisChoose.setLanguageType(this_langauge_type, \Complement);
 			s.sync;
 			currentEnvironment.put(("synth_duration_"++synth_num.asString).asSymbol, ~set_LanguageTypeDuration.next(this_langauge_type).choose);
 
@@ -161,11 +153,8 @@ e.add(\complement_sequence-> {
 
 			~synth_trig[this_synth_langauge_type].value;
 			synth_num.postln;
-			s.sync;
 
-
-			if(current_posture==\Complement,  {10.wait;}, {if(previous_posture==\Complement,  {10.wait;}, {s.sync;});});
-			if(current_posture==\Unison,  {10.wait;}, {if(previous_posture==\Unison,  {10.wait;}, {s.sync;});});
+			currentEnvironment.at(("synth_duration_"++synth_num.asString).asSymbol).wait;
 
 			loop{
 
@@ -181,14 +170,15 @@ e.add(\complement_sequence-> {
 e.add(\juxtaposition_sequence-> {
 	currentEnvironment.put(("synth_routine_"++~synth_counter.asString).asSymbol,
 		Routine({
-			var synth_num = ~synth_counter, this_langauge_type = ~incoming_language_type, this_synth_langauge_type = 0;
+			var synth_num = ~synth_counter, this_langauge_type = ~incoming_language_type, this_synth_langauge_type;
 			"\\juxtaposition_sequence".postln;
-			this_synth_langauge_type = BraxtonMorrisChoose.setLanguageType(~incoming_language_type, ~current_posture);
-			currentEnvironment.put(("synth_duration_"++synth_num.asString).asSymbol, ~set_LanguageTypeDuration.next(this_langauge_type).choose;);
+			this_synth_langauge_type = BraxtonMorrisChoose.setLanguageType(this_langauge_type, \Juxtaposition);
+			0.01.wait;
+			currentEnvironment.put(("synth_duration_"++synth_num.asString).asSymbol, ~set_LanguageTypeDuration.next(\8).choose;);
 			~synth_trig[this_synth_langauge_type].value;
 			currentEnvironment.at(("synth_duration_"++synth_num.asString).asSymbol).wait;
 			e[\synths_sequence_choose].value;
-			~over_lap_wait[[0, 1, 2, 3, 4].wchoose([0.1, 0.2, 0.4, 0.5, 0.2].normalizeSum)].choose.wait;
+			~over_lap_wait[[0, 1, 2, 3, 4, 5].wchoose([0.3, 0.2, 0.2, 0.3, 0.7, 0.5].normalizeSum)].choose.wait;
 			currentEnvironment.at(("synth_instance_"++synth_num.asString).asSymbol).set(\gate, 0);
 			if(currentEnvironment.at(("pattern_instance_"++synth_num.asString).asSymbol).isPlaying,
 				{currentEnvironment.at(("pattern_instance_"++synth_num.asString).asSymbol).stop}, {nil});
@@ -196,6 +186,7 @@ e.add(\juxtaposition_sequence-> {
 	);
 });
 
+~incoming_language_type=\8;
 //recall sequence
 e.add(\recall_sequence-> {
 	currentEnvironment.put(("synth_routine_"++~synth_counter.asString).asSymbol,
@@ -206,7 +197,7 @@ e.add(\recall_sequence-> {
 			~synth_trig[\11].value;
 			currentEnvironment.at(("synth_duration_"++synth_num.asString).asSymbol).wait;
 			e[\synths_sequence_choose].value;
-			~over_lap_wait[[0, 1, 2, 3, 4].wchoose([0.1, 0.2, 0.4, 0.5, 0.2].normalizeSum)].choose.wait;
+			~over_lap_wait[[0, 1, 2, 3, 4, 5].wchoose([0.2, 0.3, 0.5, 0.1, 0.1, 0.1].normalizeSum)].choose.wait;
 			currentEnvironment.at(("synth_instance_"++synth_num.asString).asSymbol).set(\gate, 0);
 			if(currentEnvironment.at(("pattern_instance_"++synth_num.asString).asSymbol).isPlaying,
 				{currentEnvironment.at(("pattern_instance_"++synth_num.asString).asSymbol).stop}, {nil});

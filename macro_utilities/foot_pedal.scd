@@ -10,18 +10,28 @@ Ndef(\oscValues_keys, {
 	SendReply.kr(trig_b, "/innerOscFlow_key_b", data_b);
 });
 
+
 (
-	OSCFunc({ arg msg;
-		if(msg[3] > 0.5, {"kill language".postln;  ~language_type_routine.stop; ~incoming_language_type=\0;}, {nil});
-		if(msg[3]  < 0.5, {"get_language".postln; e[\get_language].value}, {nil});
-	}, "/innerOscFlow_key_a");
+OSCFunc({ arg msg;
+	//msg[3].postln;
+
+	if(msg[3] > 0.5, {if(~end!=1, {"kill language".postln;  thisProcess.interpreter.executeFile(~trigger_file_path++"escape_synth_2.scd")}, {Routine({~end_routine.stop; s.sync; thisProcess.interpreter.executeFile(~macro_path++"end_all.scd")}).play;});}, {nil});
+	if(msg[3]  < 0.5, {nil}, {nil});
+
+}, "/innerOscFlow_key_a");
 );
 
-/*(
+
+(
 OSCFunc({ arg msg;
-if(msgaaaaaaaaaaaaaaaaaaaa[3] == 1, {e[\build].value}, {nil});
-if(msg[3aa]  == 0, {e[\release].value}, {nil});
-}, "/innerOscFlow_key_b");a
-);*/
+	//msg[3].postln;
+	if(msg[3] > 0.5, {if(~end!=1, {"kill language".postln;  thisProcess.interpreter.executeFile(~trigger_file_path++"escape_synth_3.scd")}, {Routine({~end_routine.stop; s.sync; thisProcess.interpreter.executeFile(~macro_path++"end_all_fade.scd")}).play;});}, {nil});
+	if(msg[3]  < 0.5, {nil}, {nil});
+}, "/innerOscFlow_key_b");
+);
+
+
+
+
 
 

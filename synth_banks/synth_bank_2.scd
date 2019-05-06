@@ -31,7 +31,7 @@
 });
 
 
-
+/*
 ~synth_bank_2.add(\4-> {
 
 		Synth(\playbuf_drone, [\bufnum, b[\voyager_drone_formings][1], \atk, if(~onset_2 == \downbeat, {0.01}, {if(~onset_2 == \departue, {0.01}, {~onset_time_2});}); , \rel, ~terminate_time_2, \del, ~delay_2, \prolongation, ~prolongation_2, \gate, 1, \out,  ~outbus_patterns], ~pattern_mixer_node).register;
@@ -45,7 +45,7 @@
 });
 
 
-/*~synth_bank_2.add(\7-> {
+~synth_bank_2.add(\7-> {
 
 Synth(\playbuf_drone, [\bufnum, b[\voyager_drone_formings][4], \atk, if(~onset_2 == \downbeat, {0.01}, {if(~onset_2 == \departue, {0.01}, {~onset_time_2});}); , \rel, ~terminate_time_2,, \del, ~delay_2, \prolongation, ~prolongation_2, \gate, 1, \out,  ~outbus_patterns], ~pattern_mixer_node).register;
 

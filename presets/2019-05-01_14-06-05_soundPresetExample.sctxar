@@ -2,8 +2,7 @@ var o, p;
 o = [
 	Archive.prNew,  IdentityDictionary.prNew,  Array.prNew(32),  Event.prNew,  
 	Array.prNew(32),  Array.prNew(7),  Array.prNew(7),  Array.prNew(7),  
-	Array.prNew(24),  Array.prNew(24),  Array.prNew(24),  Array.prNew(11),  
-	Array.prNew(24)
+	Array.prNew(24),  Array.prNew(24),  Array.prNew(24),  Array.prNew(11)
 ];
 p = [
 	// Archive
@@ -22,7 +21,7 @@ p = [
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil ],  
 	// Event
-	3, [ array: o[4],  size: 8,  
+	3, [ array: o[4],  size: 7,  
 		proto: nil,  parent: nil,  
 		know: true ],  
 	// Array
@@ -33,7 +32,7 @@ p = [
 		nil,  nil,  '04-29_1-2019',  o[10],  
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  '11-14-2018-1',  o[11],  
-		'05-03-2019_dress',  o[12],  nil,  nil ],  
+		nil,  nil,  nil,  nil ],  
 	// Array
 	5, [ 0.03125,  0.8828125,  0.7890625,  0.2578125,  
 		0.1171875,  0.0625,  0 ],  
@@ -67,13 +66,6 @@ p = [
 	// Array
 	11, [ 0.546875,  0.5546875,  0.484375,  0.3984375,  
 		0.0,  0.0,  0.0,  0.0,  
-		0.0,  0.0,  0 ],  
-	// Array
-	12, [ 0.140625,  0.7734375,  0.421875,  0.5390625,  
-		0.1953125,  0.0859375,  0.37,  0.091836734693878,  
-		1.0,  1.0,  1.0,  1.0,  
-		1.0,  1.0,  1.0,  1.0,  
-		0.19706198667806,  0.79112333077978,  0.7246004501732,  0.5084203897054,  
-		0.50848268126604,  0.36545154475634,  0.69873624662877,  3 ]
+		0.0,  0.0,  0 ]
 ];
 prUnarchive(o,p);

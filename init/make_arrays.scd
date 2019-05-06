@@ -32,7 +32,7 @@
 ~end_wait = Array.series(100, 0.5, 0.5);
 
 
-~over_lap_wait = [[0.01], Array.series(36, 4, 0.2),  Array.series(46, 11, 0.2), Array.series(46, 20, 1), Array.series(56, 65, 1)];
+~over_lap_wait = [[0.01], Array.series(36, 4, 0.2),  Array.series(46, 11, 0.2), Array.series(46, 20, 1), Array.series(56, 65, 1), Array.series(61, 120, 1)];
 
 ~silence_wait_times = [Array.series(36, 3, 0.1), Array.series(36, 6.5, 0.2), Array.series(56, 13.5, 1), Array.series(66, 68.5, 1)];
 ~silence_follow_wait_times = [[0.001], Array.series(36, 3, 0.1), Array.series(36, 6.5, 0.2)];

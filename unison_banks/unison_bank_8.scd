@@ -1,7 +1,7 @@
 ~unison_bank_8.add(\0-> {
 
 	//FIX ADD HPF
-	Synth(\fric, [\amp, -6, \input, ~sum_out_send, \atk, ~onset_time_12, \rel, ~terminate__time_12, \gate, 1, \out,  ~outbus_processing], target: ~live_processing_node).register;
+	Synth(\fric, [\lpf_mix, 10000, \hpf_mix, 100, \lag_time, 7, \amp, -6, \input, ~sum_out_send, \atk, ~onset_time_12, \rel, ~terminate__time_12, \gate, 1, \out,  ~outbus_processing], target: ~live_processing_node).register;
 });
 
 ~unison_bank_8.add(\1-> {

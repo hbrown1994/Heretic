@@ -29,7 +29,7 @@
 			\low_pass_freq, 20000,
 			\high_pass_mix, 0,
 			\high_pass_freq, 30,
-			\out, currentEnvironment.at(("pattern_bus_"++this_synth.asString).asSymbol), //currentEnvironment.at(("pattern_bus_"++this_synth.asString).asSymbol),
+			\out, currentEnvironment.at(("pattern_bus_"++this_synth.asString).asSymbol),
 			\group, ~pattern_node,
 		);
 	).play;
@@ -94,7 +94,7 @@
 				\atk, 0.0005,
 				\rel, 0.0005,
 				\sus, Pkey(\dur),
-				\out, currentEnvironment.at(("pattern_bus_"++this_synth.asString).asSymbol),  //currentEnvironment.at(("pattern_bus_"++this_synth.asString).asSymbol),
+				\out, currentEnvironment.at(("pattern_bus_"++this_synth.asString).asSymbol),
 				\group, ~pattern_node,
 			);
 		).play(TempoClock);

@@ -1,5 +1,5 @@
 SynthDef(\mel_2, {
-	arg freq=440, wait_time=0.2, tableSize=2, amp_init=(0.5 + 0.5.rand), delaytime, delayfactor, del, atk, gate=1, rel, amp=(-6);
+	arg out, freq=440, wait_time=0.2, tableSize=2, amp_init=(0.5 + 0.5.rand), delaytime, delayfactor, del, atk, gate=1, rel, amp=(-6);
 	var sig, sine, timer, onsets, amp_sel, chain, rec_sel, temp, sum, env;
 	temp = 0;
 	sum = 0;
@@ -34,6 +34,6 @@ SynthDef(\mel_2, {
 
 	sig = Pan2.ar(Mix([sig, sum]), TChoose.kr(onsets, [-1, 0, 1]).lag(0.1)) * env * amp.dbamp;
 
-	Out.ar(0, Pan2.ar(Mix([sig, sum]), TChoose.kr(onsets, [-1, 0, 1]).lag(0.1)));
+	Out.ar(out, Pan2.ar(Mix([sig, sum]), TChoose.kr(onsets, [-1, 0, 1]).lag(0.1)));
 
 }).add;

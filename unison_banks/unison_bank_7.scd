@@ -2,7 +2,7 @@
 
 	//, [b[\bombastic][3], b[\contin][0]].choose
 	// SLIGHTLY DELAY AND USING COMPELLING SAAMPLES
-	Synth(\concat_delay, [\input, ~sum_out_send, \out, 0, \bufnum, b[\contin][0], \zcr, 0, \lms, 0, \sc, 1, \st, 0, \matchlength, 0.05, \atk, ~onset_time_12, \rel, ~terminate_time_12, \gate, 1, \amp, -12 ], target: ~live_processing_node).register;
+	Synth(\concat_delay, [\input, ~sum_out_send, \out, ~outbus_processing, \bufnum, b[\contin][0], \zcr, 0, \lms, 0, \sc, 1, \st, 0, \matchlength, 0.05, \atk, ~onset_time_12, \rel, ~terminate_time_12, \gate, 1, \amp, -6 ], target: ~live_processing_node).register;
 
 });
 
@@ -34,7 +34,7 @@
 		\timeDispersion_low, 0.0, \timeDispersion_med, 0.005, \timeDispersion_high, 0.01,
 
 		\pitchDispersion_gate, 1,
-		\pitchDispersion_low, 0.0,  \pitchDispersion_med, 0.005, \pitchDispersion_high, 0.01
+		\pitchDispersion_low, 0.0,  \pitchDispersion_med, 0.005, \pitchDispersion_high, 0.01, \amp, -3
 
 
 	], ~live_processing_node).register;
@@ -48,7 +48,7 @@
 
 			//looping
 			\startPos, 1, \startLoop, 1,
-			\prelevel, 0.0,
+			\prelevel, 0.0, \amp, -9,
 
 			//rate
 			\rate_low_gate, 1, \rate_low_time,currentEnvironment.at(("synth_duration_"++~synth_counter.asString).asSymbol), \rate_low_1, 0.8 ,\rate_low_2, 1.0,

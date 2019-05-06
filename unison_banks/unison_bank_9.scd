@@ -1,6 +1,6 @@
 ~unison_bank_9.add(\0-> {
 
-	Synth(\ntube_9, [\amp, -6, \mix_low, -1.0, \mix_high, -1.0, \input_bus, ~sum_out_send, \atk, ~onset_time_12, \rel, ~terminate_time_12,  ~prolongation_12, \gate, 1, \out,  ~outbus_processing], target: ~live_processing_node).register;
+	Synth(\ntube_9, [\out,  ~outbus_processing, \amp, -6, \mix_low, -1.0, \mix_high, -1.0, \input_bus, ~sum_out_send, \atk, 1, \rel, ~terminate_time_12,  ~prolongation_12, \gate, 1], target: ~live_processing_node).register;
 
 });
 
@@ -41,14 +41,14 @@
 
 });
 
-~unison_bank_9.add(\3-> {
+~unison_bank_9.add(\2-> {
 
 	Synth(\loop_glitch,
 		[\gate, 1,
 
 			//looping
 			\startPos, 1, \startLoop, 1,
-			\prelevel, 0.0,
+			\prelevel, 0.0, \amp, -9,
 
 			//rate
 			\rate_low_gate, 1, \rate_low_time,currentEnvironment.at(("synth_duration_"++~synth_counter.asString).asSymbol), \rate_low_1, 0.8 ,\rate_low_2, 1.0,

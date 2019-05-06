@@ -15,7 +15,7 @@
 		\rel_env_low_array,SmalleyPatternOnset.setPatternOnset(~onset_4, 4, 6, 7)++SmalleyPatternContinuation.setPatternContinuation(~continuation_4, ~onset_4, 4, 6, 7)++SmalleyPatternTerminate.setPatterntermination(~terminate_4, ~continuation_4, 4, 6, 7),
 	    \rel_env_high_array,SmalleyPatternOnset.setPatternOnset(~onset_4, 9, 10, 12)++SmalleyPatternContinuation.setPatternContinuation(~continuation_4, ~onset_4, 9, 10, 12)++SmalleyPatternTerminate.setPatterntermination(~terminate_4, ~continuation_4, 9, 10, 12),
 		\bend_env_array, SmalleyPatternOnset.setPatternOnset(~onset_4, 12, 21, 36)++SmalleyPatternContinuation.setPatternContinuation(~continuation_4, ~onset_4, 12, 21, 36)++SmalleyPatternTerminate.setPatterntermination(~terminate_4, ~continuation_4, 12, 21, 36),
-		\dist, 0.08, \amp, 0,
+		\dist, 0.08, \amp, -12,
 		\atk, if(~onset_4 == \downbeat, {0.01}, {if(~onset_4 == \departue, {0.01}, {~onset_time_4});}); , \env_rel, ~terminate_time_4,
 		\out, ~outbus_patterns
 	], ~pattern_mixer_node).register;
@@ -50,7 +50,7 @@
 
 		\times_array, [~onset_time_4, currentEnvironment.at(("synth_duration_"++~synth_counter.asString).asSymbol), ~terminate_time_4],
 		\atk, if(~onset_4 == \downbeat, {0.01}, {if(~onset_4 == \departue, {0.01}, {~onset_time_4});}); , \env_rel, ~terminate_time_4,
-		\out, ~outbus_patterns
+		\out, ~outbus_patterns, \amp, -30,
 
 	], ~pattern_mixer_node).register;
 
@@ -58,7 +58,7 @@
 
 
 
-
+/*
 ~synth_bank_4.add(\2-> {
 
 	Synth(\fast_mel, [
@@ -94,10 +94,10 @@
 	], ~pattern_mixer_node).register;
 
 });
+*/
+~synth_bank_4.add(\2-> {
 
-~synth_bank_4.add(\3-> {
-
-	Synth(\mel_2, [\freq, 440, \wait_time, 0.2, \tableSize, 2, \amp_init, (0.5 + 0.5.rand), \delaytime, 1.0, \delayfactor, 0.0, \atk, if(~onset_4 == \downbeat, {0.01}, {if(~onset_4 == \departue, {0.01}, {~onset_time_4});}); , \rel, ~terminate_time_4, \out, ~outbus_patterns], ~pattern_mixer_node).register;
+	Synth(\mel_2, [\amp, -30, \freq, 440, \wait_time, 0.2, \tableSize, 2, \amp_init, (0.5 + 0.5.rand), \delaytime, 1.0, \delayfactor, 0.0, \atk, if(~onset_4 == \downbeat, {0.01}, {if(~onset_4 == \departue, {0.01}, {~onset_time_4});}); , \rel, ~terminate_time_4, \out, ~outbus_patterns], ~pattern_mixer_node).register;
 
 
 });

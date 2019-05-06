@@ -1,10 +1,12 @@
 SynthDef(\delay_3, {
 	arg amp=(-6), out=2, atk=0.05, sus=0.6, dec=20, rel=0.05, curve=(-10), gate=1, time=180, predelay=0.1, input_bus, del, prolongation, bias=0;
-	var env, sig, temp, in;
+	var env, sig, temp, in, onset_env;
 
 	in = In.ar(input_bus);
 
 	env = EnvGen.kr(Env.dadsr(del, atk, 0.01, 1, rel, 1, [0, 9, 9, prolongation], bias), gate, doneAction: 2);
+
+	onset_env = EnvGen.kr(Env.asr(5, 1, 0.01), 1, doneAction: 2);
 
 	sig = 0;
 
@@ -18,7 +20,7 @@ SynthDef(\delay_3, {
 
 		sig = sig + temp;
 	};
-	sig = sig * env * amp.dbamp.lag(0.1);
+	sig = sig * env * amp.dbamp.lag(0.1) * onset_env;
 
 	Out.ar(out, Pan2.ar(sig, LFBrownNoise1.kr(({Rand(1, 1.5)}), 1, {IRand(0, 5)}).linlin(-1, 1, -0.9, 0.9)));
 }).add;

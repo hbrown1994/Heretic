@@ -1,0 +1,1 @@
+~feature_test_percussion = Synth(\features_test, [\out, ~dry_out], ~live_processing_node).register;

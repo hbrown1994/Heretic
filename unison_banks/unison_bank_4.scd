@@ -1,11 +1,11 @@
 
 ~unison_bank_4.add(\0-> {
 	//GOOD -> have freq setting change with each kick onset
-	Synth(\klank, [\amp, 0, \input_onsets, ~onset_sends, \input, ~sum_out_send, \out,  ~outbus_processing, \atk, ~onset_time_12, \rel, ~terminate_time_12,  ~prolongation_12, \gate, 1], target: ~live_processing_node).register;
+	Synth(\klank, [\amp, -6, \input_onsets, ~onset_sends, \input, ~sum_out_send, \out,  ~outbus_processing, \atk, ~onset_time_12, \rel, ~terminate_time_12,  ~prolongation_12, \gate, 1], target: ~live_processing_node).register;
 });
 
 
-~unison_bank_4.add(\0-> {
+~unison_bank_4.add(\1-> {
 	Synth(\loop_glitch_mel,
 		[\gate, 1,
 

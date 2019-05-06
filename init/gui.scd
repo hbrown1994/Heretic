@@ -274,7 +274,7 @@ c[4].decorator_(FlowLayout(c[4].bounds, 20@25, 30@0)); // Array 0
 Array.fill(7, {Knob(c[4], 30@30)});
 
 c[4].decorator_(FlowLayout(c[4].bounds, 545@5, 4@0)); // A
-Array.fill(1, {Button(c[4], 50@50).font_(Font(size: 15)).states_([["Mono", Color.black, Color.gray(0.8)]])});
+Array.fill(1, {Button(c[4], 1@1).font_(Font(size: 15)).states_([["Mono", Color.black, Color.gray(0.8)]])});
 
 c[4].decorator_(FlowLayout(c[4].bounds, 490@55, 10@0)); // Array 0
 c[4].background_(Color(0, 0, 0));
@@ -285,6 +285,14 @@ Array.fill(1, {NumberBox(c[4], 50@20)});
 
 c[4].decorator_(FlowLayout(c[4].bounds, 490@5, 4@0)); // A
 Array.fill(1, {Button(c[4], 50@20).font_(Font(size: 15)).states_([["Onset", Color.black, Color.gray(0.8)], ["Off",  Color.black, Color(1,0,0)]])});
+
+c[4].decorator_(FlowLayout(c[4].bounds, 550@55, 10@0)); // Array 0
+Array.fill(1, {Slider(c[4], 50@120)});
+c[4].decorator.nextLine;
+Array.fill(1, {NumberBox(c[4], 50@20)});
+
+c[4].decorator_(FlowLayout(c[4].bounds, 550@5, 4@0)); // A
+Array.fill(1, {Button(c[4], 50@20).font_(Font(size: 15)).states_([["Thresh", Color.black, Color.gray(0.8)], ["Off",  Color.black, Color(1,0,0)]])});
 
 
 // Composite View 5: Computer Output Mixing  ------------------------------------------
@@ -741,6 +749,35 @@ Array.fill(1, {Button(c[5], 50@50).font_(Font(size: 15)).states_([["Test", Color
 	if(obj.value == 1, {e[\drum_onset_test].value},{e[\drum_onset_test_off].value});
 });
 
+~feature_onset_slider= c[4].children[27].action_({
+	arg obj;
+	var thresh=0.0;
+	thresh = obj.value;
+
+	if(~features_drums.isPlaying,
+		{~features_drums.set(\thresh, thresh)}
+	);
+	if(~feature_test_percussion.isPlaying,
+		{~feature_test_percussion.set(\thresh, thresh)}
+	);
+	~feature_onset_numBox.value_(obj.value);
+});
+
+~feature_onset_numBox = c[4].children[28]
+.decimals_(3)
+.action_({
+	arg obj;
+	~feature_onset_slider.valueAction_(obj.value)
+});
+
+
+~feature_onset_test_trig = c[4].children[29]
+.action_({
+	arg obj;
+	if(obj.value == 1, {e[\feature_onset_test].value},{e[\feature_onset_test_off].value});
+});
+
+
 
 
 
@@ -887,7 +924,15 @@ Array.fill(1, {Button(c[5], 50@50).font_(Font(size: 15)).states_([["Test", Color
 ~rack_pan_knob.valueAction_(0.5);
 ~floor_pan_knob.valueAction_(0.5);
 
+
+
 /*______________________________________________ 5. Build Preset Directory GUI ______________________________________________*/
+
+
+
+
+
+
 
 
 Array.fill(1, {
@@ -900,7 +945,7 @@ Array.fill(1, {
 	));
 
 	~preset.start(
-		[~silence_slider, ~unison_slider, ~complement_slider, ~juxtaposition_slider, ~solo_slider, ~recall_slider], //interpolation objects
+		[~silence_slider, ~unison_slider, ~complement_slider, ~juxtaposition_slider, ~solo_slider, ~recall_slider, ~feature_onset_slider, ~percussion_onset_slider, ~oh_left_slider, ~oh_right_slider, ~snare_slider, ~hat_slider, ~kick_slider, ~rack_slider, ~floor_slider, ~drum_master_slider, ~oh_left_pan_knob, ~oh_right_pan_knob, ~hat_pan_knob, ~snare_pan_knob, ~kick_pan_knob, ~rack_pan_knob, ~floor_pan_knob], //interpolation objects
 		[~timing_menu] //launching objects
 	);
 

@@ -25,8 +25,8 @@ bufnum = Buffer.alloc(s, 44100*0.1, 2), freeze_speed, fft_stretch;
 	chain = PV_BinShift.new(chain, stretch: fft_stretch, shift: 0, interp: 0);
     sig1 = IFFT(chain);
 
-	sig1 = sig1 * env * amp.dbamp;
+	sig1 = Limiter.ar(sig1, 0.9) * env * amp.dbamp;
 
-	Out.ar(out, Pan2.ar(Limiter.ar(sig1, 0.9), LFBrownNoise1.ar(pan_pos)));
+	Out.ar(out, Pan2.ar(sig1, LFBrownNoise1.ar(pan_pos)));
 
 }).add;
