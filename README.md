@@ -1,3 +1,4 @@
+## Heretic: A New Live Algorithm
 *Heretic* is an artificially intelligent computer music system to be used within the context of human-machine free improvisation. 
 *Heretic* is written in the SuperCollider programming language with the machine learning aspects of the system implemented in Wekinator. 
 The motivation behind *Heretic*’s inception was to create an autonomous system that uses my own improvisational methodology as a computational 
@@ -7,7 +8,7 @@ the spontaneous creation of novel improvised music. When working collectively, t
 methodology that interacts with human improvisers in real-time. *Heretic* is trained on my approach to improvisation, but through its interactions with a 
 human performer, *Heretic*’s own improvisational voice and modes of musical expression emerge. 
 
-Publications:
+## Publications:
 
 [Master's Thesis in Digital Musics at Dartmouth College](https://drive.google.com/file/d/1R9I8bsYqph7L5Bzq_UdAluALixjJHP77/view?usp=drive_link)
 
@@ -15,14 +16,14 @@ Publications:
 
 [”Heretic: Modeling Anthony Braxton’s Language Music” (PDF)](https://drive.google.com/file/d/1lve8In-RDgF8n-OsPt3dyHOsmURLt7rV/view?usp=drive_link)
 
-Recordings:
+## Recordings:
 
 [May 3rd 2019: Dartmouth College](https://youtu.be/u1OWuICEnfY)
 
-[May 4th 2019: Dartmouth College]([https://youtu.be/u1OWuICEnfY](https://youtu.be/AbZJDMPZFdg)https://youtu.be/AbZJDMPZFdg)
+[May 4th 2019: Dartmouth College](https://youtu.be/AbZJDMPZFdg)
 
 
-Machine Listening Demo:
+## Machine Listening Demo:
 
-[May 3rd 2019: Dartmouth College]([https://youtu.be/u1OWuICEnfY](https://youtu.be/k8w9OFDgRYY)https://youtu.be/k8w9OFDgRYY)
+[May 3rd 2019: Dartmouth College](https://youtu.be/k8w9OFDgRYY)
 
