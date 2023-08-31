@@ -25,5 +25,5 @@ human performer, *Heretic*’s own improvisational voice and modes of musical ex
 
 ## Machine Listening Demo
 
-[May 3rd 2019: Dartmouth College](https://youtu.be/k8w9OFDgRYY)
+[Machine Listening Demo](https://youtu.be/k8w9OFDgRYY)
 
