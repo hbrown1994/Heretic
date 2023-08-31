@@ -7,7 +7,7 @@ the spontaneous creation of novel improvised music. When working collectively, t
 methodology that interacts with human improvisers in real-time. Heretic is trained on my approach to improvisation, but through its interactions with a 
 human performer, Heretic’s own improvisational voice and modes of musical expression emerge. 
 
-[Master's Thesis in Digital Musics at Dartmouth College](https://www.google.com](https://drive.google.com/file/d/1R9I8bsYqph7L5Bzq_UdAluALixjJHP77/view?usp=drive_link)https://drive.google.com/file/d/1R9I8bsYqph7L5Bzq_UdAluALixjJHP77/view?usp=drive_link)
+[Master's Thesis in Digital Musics at Dartmouth College](https://drive.google.com/file/d/1R9I8bsYqph7L5Bzq_UdAluALixjJHP77/view?usp=drive_link)
 
-[H.Brown and M.Casey, ”Heretic: Modeling Anthony Braxton’s Language Music”, International Workshop on Multilayer Music Representation and Processing. IEEE. (2019)]([[https://www.google.com](https://drive.google.com/file/d/1R9I8bsYqph7L5Bzq_UdAluALixjJHP77/view?usp=drive_link)https://drive.google.com/file/d/1R9I8bsYqph7L5Bzq_UdAluALixjJHP77/view?usp=drive_link](https://ieeexplore.ieee.org/document/8665363)https://ieeexplore.ieee.org/document/8665363)
+[H.Brown and M.Casey, ”Heretic: Modeling Anthony Braxton’s Language Music”, International Workshop on Multilayer Music Representation and Processing. IEEE. (2019)](https://ieeexplore.ieee.org/document/8665363)
 
