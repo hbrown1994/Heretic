@@ -25,5 +25,7 @@ human performer, *Heretic*’s own improvisational voice and modes of musical ex
 
 ## Machine Listening Demo
 
+On the top-right corner of the screen, you will see a list of 10 improvisational "Language Types" accompanied by green sliders. These sliders are a visual representation of *Heretic's* ability to detect which language type I am playing in real-time. When I start, the sliders indicate "Silence" as I am not playing. As I begin to play short, staccato drum attacks, the sliders indicate "Sparse Formings." This process continues as I traverse all 10 language types in this video. 
+
 [Machine Listening Demo](https://youtu.be/k8w9OFDgRYY)
 
