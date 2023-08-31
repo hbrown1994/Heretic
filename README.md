@@ -15,3 +15,14 @@ Publications:
 
 [”Heretic: Modeling Anthony Braxton’s Language Music” (PDF)](https://drive.google.com/file/d/1lve8In-RDgF8n-OsPt3dyHOsmURLt7rV/view?usp=drive_link)
 
+Recordings:
+
+[May 3rd 2019: Dartmouth College](https://youtu.be/u1OWuICEnfY)
+
+[May 4th 2019: Dartmouth College]([https://youtu.be/u1OWuICEnfY](https://youtu.be/AbZJDMPZFdg)https://youtu.be/AbZJDMPZFdg)
+
+
+Machine Listening Demo:
+
+[May 3rd 2019: Dartmouth College]([https://youtu.be/u1OWuICEnfY](https://youtu.be/k8w9OFDgRYY)https://youtu.be/k8w9OFDgRYY)
+
