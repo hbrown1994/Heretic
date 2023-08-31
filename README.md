@@ -8,6 +8,8 @@ the spontaneous creation of novel improvised music. When working collectively, t
 methodology that interacts with human improvisers in real-time. *Heretic* is trained on my approach to improvisation, but through its interactions with a 
 human performer, *Heretic*’s own improvisational voice and modes of musical expression emerge. 
 
+I do not support this software for others to use, but provide this here as information for the community. Please feel free to borrow my code and use it as you wish. 
+
 ## Publications
 
 [Master's Thesis in Digital Musics at Dartmouth College](https://drive.google.com/file/d/1R9I8bsYqph7L5Bzq_UdAluALixjJHP77/view?usp=drive_link)
